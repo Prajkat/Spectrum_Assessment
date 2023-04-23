@@ -1,9 +1,10 @@
 package com.example.assesmentapplication.di.module
 
-import androidx.multidex.BuildConfig
+import com.example.assesmentapplication.BuildConfig
 import com.example.assesmentapplication.model.network.RequestInterceptor
 import dagger.Module
 import dagger.Provides
+import kotlinx.coroutines.CoroutineScope
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -27,7 +28,7 @@ object NetworkModule {
       .client(okHttpClient)
       .baseUrl(BuildConfig.BASE_URL)
       .addConverterFactory(GsonConverterFactory.create())
-      //.addCallAdapterFactory(CoroutinesResponseCallAdapterFactory.create())
+      //.addCallAdapterFactory(Coroutin.create())
       .build()
   }
 

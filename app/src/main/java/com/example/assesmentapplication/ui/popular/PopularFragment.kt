@@ -6,27 +6,58 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.example.assesmentapplication.MainApplication
 import com.example.assesmentapplication.R
+import com.example.assesmentapplication.databinding.HomeFragmentBinding
+import com.example.assesmentapplication.databinding.PopularFragmentBinding
+import com.example.assesmentapplication.di.component.DaggerFragmentComponent
+import com.example.assesmentapplication.di.module.FragmentModule
+import com.example.assesmentapplication.model.response.MovieInformation
+import com.example.assesmentapplication.ui.home.HomeAdapter
+import com.example.assesmentapplication.ui.home.HomeViewModel
+import javax.inject.Inject
 
 class PopularFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = PopularFragment()
-    }
+    private lateinit var binding: PopularFragmentBinding
 
-    private lateinit var viewModel: PopularViewModel
+    @Inject
+    lateinit var viewModel: HomeViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        injectDependency()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.popular_fragment, container, false)
+        binding = PopularFragmentBinding.inflate(inflater, container, false);
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(PopularViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.popularRecyclerView.apply {
+            viewModel.movieList.observe(viewLifecycleOwner, {
+               // homeAdapter = HomeAdapter(it as MutableList<MovieInformation>, this@HomeFragment)
+            })
+
+            viewModel.errorMessage.observe(viewLifecycleOwner, {
+                Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+            })
+        }
     }
 
+    private fun injectDependency() {
+        val fragmentComponent = DaggerFragmentComponent
+            .builder()
+            .applicationComponent((activity?.application as MainApplication).applicationComponent)
+            .fragmentModule(FragmentModule(this))
+            .build()
+        fragmentComponent.inject(this)
+    }
 }

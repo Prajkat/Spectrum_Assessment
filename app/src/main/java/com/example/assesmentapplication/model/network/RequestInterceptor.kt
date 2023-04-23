@@ -1,5 +1,6 @@
 package com.example.assesmentapplication.model.network
 
+import com.example.assesmentapplication.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -8,7 +9,7 @@ internal class RequestInterceptor : Interceptor {
     val originalRequest = chain.request()
     val originalUrl = originalRequest.url()
     val url = originalUrl.newBuilder()
-      .addQueryParameter("api_key", )
+      .addQueryParameter("api_key", BuildConfig.API_KEY)
       .build()
 
     val requestBuilder = originalRequest.newBuilder().url(url)

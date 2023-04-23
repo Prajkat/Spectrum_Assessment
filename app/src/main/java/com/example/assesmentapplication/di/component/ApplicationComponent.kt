@@ -5,8 +5,8 @@ import android.content.Context
 import com.example.assesmentapplication.MainApplication
 import com.example.assesmentapplication.di.ApplicationContext
 import com.example.assesmentapplication.di.module.ApplicationModule
+import com.example.assesmentapplication.model.service.MovieService
 import dagger.Component
-import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Singleton
 
 @Singleton
@@ -20,5 +20,6 @@ interface ApplicationComponent {
     @ApplicationContext
     fun getContext(): Context
 
-    fun getCompositeDisposable(): CompositeDisposable
+    fun getMovieService(): MovieService
+
 }

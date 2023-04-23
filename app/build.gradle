@@ -3,10 +3,11 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.assesmentapplication"
@@ -62,13 +63,6 @@ dependencies {
     // Constraint Layout
    // implementation "androidx.constraintlayout:constraintlayout:$constraint_version"
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    
-    // hilt
-    implementation "com.google.dagger:hilt-android:$hiltCoreVersion"
-    kapt "com.google.dagger:hilt-compiler:$hiltCoreVersion"
-    kapt "androidx.hilt:hilt-compiler:$hiltVersion"
-    androidTestImplementation "com.google.dagger:hilt-android-testing:$hiltCoreVersion"
-    kaptAndroidTest "com.google.dagger:hilt-compiler:$hiltCoreVersion"
 
     // coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
@@ -76,11 +70,11 @@ dependencies {
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
 
-    // network
-    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpVersion"
+    // Retrofit 2
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-    implementation "com.google.code.gson:gson:$gsonVersion"
-    testImplementation "com.squareup.okhttp3:mockwebserver:$okhttpVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxjavaVersion"
 
     // glide
     implementation "com.github.bumptech.glide:glide:$glideVersion"
@@ -95,4 +89,12 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
     androidTestImplementation "androidx.test.ext:junit:$androidxTest"
     androidTestImplementation "androidx.test:rules:$androidxTestRules"
+
+    // Dagger
+    implementation "com.google.dagger:dagger:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+
+    // Reactive
+    implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
 }
