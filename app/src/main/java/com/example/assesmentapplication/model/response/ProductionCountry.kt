@@ -1,4 +1,4 @@
-package com.example.assesmentapplication.model.datamodel
+package com.example.assesmentapplication.model.response
 
 data class ProductionCountry(
     val iso_3166_1: String,

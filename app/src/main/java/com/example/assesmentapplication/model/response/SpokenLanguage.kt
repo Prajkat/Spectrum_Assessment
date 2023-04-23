@@ -1,4 +1,4 @@
-package com.example.assesmentapplication.model.datamodel
+package com.example.assesmentapplication.model.response
 
 data class SpokenLanguage(
     val english_name: String,

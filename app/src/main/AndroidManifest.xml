@@ -10,14 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AssesmentApplication">
         <activity
-            android:name=".ui.home.HomeActivity"
+            android:name=".ui.moviedetails.MovieDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.base.BaseActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.splash.SplashActivity"
-            android:exported="true">
+            android:name=".ui.MainActivity"
+            android:exported="true"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

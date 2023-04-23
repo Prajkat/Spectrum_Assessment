@@ -8,7 +8,7 @@ import dagger.Provides
 @Module
 class ViewHolderModule() {
 
-  /*  @Provides
-    @ViewModelScope
-    fun provideLifecycleRegistry(): LifecycleRegistry = LifecycleRegistry()*/
+      @Provides
+      @ViewModelScope
+      fun provideLifecycleRegistry(): LifecycleRegistry = LifecycleRegistry()
 }

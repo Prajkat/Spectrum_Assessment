@@ -1,31 +1,32 @@
-package com.example.assesmentapplication.ui.home
+package com.example.assesmentapplication.ui.upcoming
 
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
 import com.example.assesmentapplication.R
 
-class HomeFragment : Fragment() {
+class UpcomingFragment : Fragment() {
 
     companion object {
-        fun newInstance() = HomeFragment()
+        fun newInstance() = UpcomingFragment()
     }
 
-    private lateinit var viewModel: HomeViewModel
+    private lateinit var viewModel: UpcomingViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.home_fragment, container, false)
+        return inflater.inflate(R.layout.upcoming_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(UpcomingViewModel::class.java)
         // TODO: Use the ViewModel
     }
+
 }
