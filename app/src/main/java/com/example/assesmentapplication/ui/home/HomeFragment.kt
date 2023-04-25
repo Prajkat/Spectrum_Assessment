@@ -40,13 +40,13 @@ class HomeFragment : Fragment(), OnItemClickListener {
         binding.movieRecyclerView.apply {
             viewModel.movieList.observe(viewLifecycleOwner, {
                 homeAdapter = HomeAdapter(it as MutableList<MovieInformation>, this@HomeFragment)
+                adapter = homeAdapter
             })
 
             viewModel.errorMessage.observe(viewLifecycleOwner, {
                 Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
             })
         }
-
     }
 
     private fun injectDependency() {

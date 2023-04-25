@@ -1,35 +1,15 @@
 package com.example.assesmentapplication.di.module
 
-import com.example.assesmentapplication.BuildConfig
-import com.example.assesmentapplication.model.network.RequestInterceptor
+import android.content.Context
+import com.example.assesmentapplication.model.service.MovieService
+import com.example.assesmentapplication.model.service.WebApiServicesProvider
 import dagger.Module
 import dagger.Provides
-import kotlinx.coroutines.CoroutineScope
-import okhttp3.OkHttpClient
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Singleton
 
 @Module
-object NetworkModule {
+class NetworkModule(private val context: Context) {
 
-  @Provides
-  @Singleton
-  fun provideOkHttpClient(): OkHttpClient {
-    return OkHttpClient.Builder()
-      .addInterceptor(RequestInterceptor())
-      .build()
-  }
-
-  @Provides
-  @Singleton
-  fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
-    return Retrofit.Builder()
-      .client(okHttpClient)
-      .baseUrl(BuildConfig.BASE_URL)
-      .addConverterFactory(GsonConverterFactory.create())
-      //.addCallAdapterFactory(Coroutin.create())
-      .build()
-  }
-
+    @Provides
+    fun provideWebApiServices(): MovieService =
+        WebApiServicesProvider.createWebApiServices(context)
 }

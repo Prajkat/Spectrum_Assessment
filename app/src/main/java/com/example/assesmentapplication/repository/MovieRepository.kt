@@ -1,22 +1,24 @@
 package com.example.assesmentapplication.repository
 
 import com.example.assesmentapplication.model.network.Networking
+import com.example.assesmentapplication.model.response.MovieInformation
 import com.example.assesmentapplication.model.service.MovieService
+import io.reactivex.Observable
 import javax.inject.Inject
 
 class MovieRepository @Inject constructor(
     private val movieService: MovieService,
 ) : Repository {
 
-    suspend fun fetchNowPlayingMovies(page: Int) =
-        movieService.fetchNowPlayingMovies(page, Networking.API_KEY)
+    fun fetchNowPlayingMovies(page: Int): Observable<List<MovieInformation>> =
+        movieService.fetchNowPlayingMovies(page)
 
-    suspend fun fetchTopRatedMovies(page: Int) =
-        movieService.fetchTopRatedMovies(page, Networking.API_KEY)
+     fun fetchTopRatedMovies(page: Int): Observable<List<MovieInformation>> =
+        movieService.fetchTopRatedMovies(page)
 
-    suspend fun fetchPopularMovies(page: Int) =
-        movieService.fetchPopularMovies(page, Networking.API_KEY)
+     fun fetchPopularMovies(page: Int): Observable<List<MovieInformation>> =
+        movieService.fetchPopularMovies(page)
 
-    suspend fun fetchUpcomingMovies(page: Int) =
-        movieService.fetchUpcomingMovies(page, Networking.API_KEY)
+     fun fetchUpcomingMovies(page: Int): Observable<List<MovieInformation>> =
+        movieService.fetchUpcomingMovies(page)
 }

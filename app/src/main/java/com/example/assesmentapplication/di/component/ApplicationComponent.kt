@@ -5,12 +5,13 @@ import android.content.Context
 import com.example.assesmentapplication.MainApplication
 import com.example.assesmentapplication.di.ApplicationContext
 import com.example.assesmentapplication.di.module.ApplicationModule
+import com.example.assesmentapplication.di.module.NetworkModule
 import com.example.assesmentapplication.model.service.MovieService
 import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [ApplicationModule::class])
+@Component(modules = [ApplicationModule::class, NetworkModule::class])
 interface ApplicationComponent {
 
     fun inject(app: MainApplication)
@@ -20,6 +21,5 @@ interface ApplicationComponent {
     @ApplicationContext
     fun getContext(): Context
 
-    fun getMovieService(): MovieService
-
+    fun getMovieApiServices(): MovieService
 }

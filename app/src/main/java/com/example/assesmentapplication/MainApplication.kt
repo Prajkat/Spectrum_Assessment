@@ -19,6 +19,7 @@ class MainApplication : Application() {
         applicationComponent = DaggerApplicationComponent
             .builder()
             .applicationModule(ApplicationModule(this))
+            .networkModule(NetworkModule(this))
             .build()
         applicationComponent.inject(this)
     }

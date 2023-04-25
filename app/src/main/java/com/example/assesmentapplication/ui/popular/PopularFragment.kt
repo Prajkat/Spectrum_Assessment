@@ -23,7 +23,7 @@ class PopularFragment : Fragment() {
     private lateinit var binding: PopularFragmentBinding
 
     @Inject
-    lateinit var viewModel: HomeViewModel
+    lateinit var viewModel: PopularViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

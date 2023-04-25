@@ -30,15 +30,4 @@ class ApplicationModule(private val application: MainApplication) {
      */
     @Provides
     fun provideCompositeDisposable(): CompositeDisposable = CompositeDisposable()
-
-    @Provides
-    @Singleton
-    fun provideNetworkService(): MovieService =
-        Networking.create(
-            BuildConfig.API_KEY,
-            BuildConfig.BASE_URL,
-            application.cacheDir,
-            10 * 1024 * 1024
-        ) // 10MB
-
 }
