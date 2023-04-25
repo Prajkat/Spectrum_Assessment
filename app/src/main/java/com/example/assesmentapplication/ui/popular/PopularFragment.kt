@@ -1,26 +1,25 @@
 package com.example.assesmentapplication.ui.popular
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.example.assesmentapplication.MainApplication
-import com.example.assesmentapplication.R
-import com.example.assesmentapplication.databinding.HomeFragmentBinding
 import com.example.assesmentapplication.databinding.PopularFragmentBinding
 import com.example.assesmentapplication.di.component.DaggerFragmentComponent
 import com.example.assesmentapplication.di.module.FragmentModule
 import com.example.assesmentapplication.model.response.MovieInformation
 import com.example.assesmentapplication.ui.home.HomeAdapter
-import com.example.assesmentapplication.ui.home.HomeViewModel
+import com.example.assesmentapplication.ui.home.OnItemClickListener
 import javax.inject.Inject
 
-class PopularFragment : Fragment() {
+class PopularFragment : Fragment(), OnItemClickListener {
 
     private lateinit var binding: PopularFragmentBinding
+
+    private lateinit var homeAdapter: HomeAdapter
 
     @Inject
     lateinit var viewModel: PopularViewModel
@@ -43,7 +42,7 @@ class PopularFragment : Fragment() {
 
         binding.popularRecyclerView.apply {
             viewModel.movieList.observe(viewLifecycleOwner, {
-               // homeAdapter = HomeAdapter(it as MutableList<MovieInformation>, this@HomeFragment)
+                 homeAdapter = HomeAdapter(it as MutableList<MovieInformation>, this@PopularFragment)
             })
 
             viewModel.errorMessage.observe(viewLifecycleOwner, {
@@ -59,5 +58,9 @@ class PopularFragment : Fragment() {
             .fragmentModule(FragmentModule(this))
             .build()
         fragmentComponent.inject(this)
+    }
+
+    override fun onItemClicked(feeds: MovieInformation) {
+       // TODO("Not yet implemented")
     }
 }

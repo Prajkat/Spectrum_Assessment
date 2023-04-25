@@ -1,32 +1,70 @@
 package com.example.assesmentapplication.ui.toprated
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.assesmentapplication.R
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import com.example.assesmentapplication.MainApplication
+import com.example.assesmentapplication.databinding.TopRatedFragmentBinding
+import com.example.assesmentapplication.di.component.DaggerFragmentComponent
+import com.example.assesmentapplication.di.module.FragmentModule
+import com.example.assesmentapplication.model.response.MovieInformation
+import com.example.assesmentapplication.ui.home.HomeAdapter
+import com.example.assesmentapplication.ui.home.OnItemClickListener
+import com.example.assesmentapplication.ui.popular.PopularViewModel
+import javax.inject.Inject
 
-class TopRatedFragment : Fragment() {
+class TopRatedFragment : Fragment(), OnItemClickListener {
 
-    companion object {
-        fun newInstance() = TopRatedFragment()
+    private lateinit var binding: TopRatedFragmentBinding
+
+    private lateinit var homeAdapter: HomeAdapter
+
+    @Inject
+    lateinit var viewModel: PopularViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        injectDependency()
     }
-
-    private lateinit var viewModel: TopRatedViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.top_rated_fragment, container, false)
+        binding = TopRatedFragmentBinding.inflate(inflater, container, false);
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(TopRatedViewModel::class.java)
-        // TODO: Use the ViewModel
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.topRatedRecyclerView.apply {
+            viewModel.movieList.observe(viewLifecycleOwner, {
+                homeAdapter =
+                    HomeAdapter(it as MutableList<MovieInformation>, this@TopRatedFragment)
+
+            })
+
+            viewModel.errorMessage.observe(viewLifecycleOwner, {
+                Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+            })
+        }
+    }
+
+    private fun injectDependency() {
+        val fragmentComponent = DaggerFragmentComponent
+            .builder()
+            .applicationComponent((activity?.application as MainApplication).applicationComponent)
+            .fragmentModule(FragmentModule(this))
+            .build()
+        fragmentComponent.inject(this)
+    }
+
+    override fun onItemClicked(feeds: MovieInformation) {
+        // TODO("Not yet implemented")
     }
 
 }

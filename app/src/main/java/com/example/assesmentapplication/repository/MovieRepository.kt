@@ -1,6 +1,5 @@
 package com.example.assesmentapplication.repository
 
-import com.example.assesmentapplication.model.network.Networking
 import com.example.assesmentapplication.model.response.MovieInformation
 import com.example.assesmentapplication.model.service.MovieService
 import io.reactivex.Observable
@@ -13,12 +12,12 @@ class MovieRepository @Inject constructor(
     fun fetchNowPlayingMovies(page: Int): Observable<List<MovieInformation>> =
         movieService.fetchNowPlayingMovies(page)
 
-     fun fetchTopRatedMovies(page: Int): Observable<List<MovieInformation>> =
+    fun fetchTopRatedMovies(page: Int): Observable<List<MovieInformation>> =
         movieService.fetchTopRatedMovies(page)
 
-     fun fetchPopularMovies(page: Int): Observable<List<MovieInformation>> =
+    fun fetchPopularMovies(page: Int): Observable<List<MovieInformation>> =
         movieService.fetchPopularMovies(page)
 
-     fun fetchUpcomingMovies(page: Int): Observable<List<MovieInformation>> =
+    fun fetchUpcomingMovies(page: Int): Observable<List<MovieInformation>> =
         movieService.fetchUpcomingMovies(page)
 }
