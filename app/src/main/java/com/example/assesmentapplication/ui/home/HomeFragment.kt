@@ -4,13 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.example.assesmentapplication.MainApplication
 import com.example.assesmentapplication.databinding.HomeFragmentBinding
 import com.example.assesmentapplication.di.component.DaggerFragmentComponent
 import com.example.assesmentapplication.di.module.FragmentModule
-import com.example.assesmentapplication.model.response.MovieInformation
+import com.example.assesmentapplication.model.response.nowplaying.Result
 import javax.inject.Inject
 
 class HomeFragment : Fragment(), OnItemClickListener {
@@ -37,16 +39,27 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.movieRecyclerView.apply {
-            viewModel.movieList.observe(viewLifecycleOwner, {
-                homeAdapter = HomeAdapter(it as MutableList<MovieInformation>, this@HomeFragment)
-                adapter = homeAdapter
-            })
+        setUpObservers()
+    }
 
-            viewModel.errorMessage.observe(viewLifecycleOwner, {
-                Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
-            })
-        }
+    private fun setUpObservers() {
+
+        viewModel.loading.observe(viewLifecycleOwner, {
+            if (it == true) {
+                binding.progressView.visibility = View.VISIBLE
+            } else {
+                binding.progressView.visibility = View.GONE
+            }
+        })
+
+        viewModel.movieList.observe(viewLifecycleOwner, {
+            homeAdapter = HomeAdapter(it.results, this@HomeFragment)
+            binding.movieRecyclerView.adapter = homeAdapter
+        })
+
+        viewModel.errorMessage.observe(viewLifecycleOwner, {
+            binding.errorTextView.visibility = View.VISIBLE
+        })
     }
 
     private fun injectDependency() {
@@ -58,7 +71,14 @@ class HomeFragment : Fragment(), OnItemClickListener {
         fragmentComponent.inject(this)
     }
 
-    override fun onItemClicked(feeds: MovieInformation) {
+    override fun onItemClicked(feeds: Result) {
         // TODO("Not yet implemented")
+    }
+}
+
+@BindingAdapter("imageUrl")
+fun loadImage(view: ImageView, url: String?) {
+    if (!url.isNullOrEmpty()) {
+        Glide.with(view.context).load(url).into(view)
     }
 }

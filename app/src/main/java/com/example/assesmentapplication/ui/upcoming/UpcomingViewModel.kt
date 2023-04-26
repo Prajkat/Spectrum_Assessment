@@ -3,6 +3,7 @@ package com.example.assesmentapplication.ui.upcoming
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.assesmentapplication.model.response.MovieInformation
+import com.example.assesmentapplication.model.response.nowplaying.MovieResponse
 import com.example.assesmentapplication.repository.MovieRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -14,7 +15,7 @@ class UpcomingViewModel @Inject constructor(
 ) : ViewModel() {
 
     val errorMessage = MutableLiveData<String>()
-    val movieList = MutableLiveData<List<MovieInformation>>()
+    val movieList = MutableLiveData<MovieResponse>()
     val loading = MutableLiveData<Boolean>()
     var disposable: Disposable? = null
 

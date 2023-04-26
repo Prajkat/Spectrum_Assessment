@@ -5,24 +5,18 @@
         android:id="@+id/action_nowPlaying"
         android:enabled="true"
         android:icon="@mipmap/ic_launcher"
-        android:title="@string/menu_nowPlaying"
-        app:showAsAction="ifRoom" />
+        android:title="@string/menu_nowPlaying" />
     <item
         android:id="@+id/action_popular"
-        android:enabled="true"
         android:icon="@mipmap/ic_launcher"
-        android:title="@string/menu_popular"
-        app:showAsAction="ifRoom" />
+        android:title="@string/menu_popular" />
     <item
         android:id="@+id/action_topRated"
-        android:enabled="true"
         android:icon="@mipmap/ic_launcher"
-        android:title="@string/menu_topRated"
-        app:showAsAction="ifRoom" />
+        android:title="@string/menu_topRated" />
 
     <item
         android:id="@+id/action_upcoming"
-        android:enabled="true"
         android:icon="@mipmap/ic_launcher"
         android:title="@string/menu_upcoming"
         app:showAsAction="ifRoom" />

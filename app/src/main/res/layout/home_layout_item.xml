@@ -6,7 +6,7 @@
      <data>
           <variable
               name="movieInformation"
-              type="com.example.assesmentapplication.model.response.MovieInformation" />
+              type="com.example.assesmentapplication.model.response.nowplaying.Result" />
       </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,6 +22,7 @@
             android:src="@drawable/ic_launcher_background"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:imageUrl="@{`https://image.tmdb.org/t/p/original`+ movieInformation.poster_path}"
             tools:src="@drawable/ic_launcher_background" />
 
         <TextView

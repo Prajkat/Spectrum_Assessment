@@ -5,17 +5,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.assesmentapplication.databinding.HomeLayoutItemBinding
-import com.example.assesmentapplication.model.response.MovieInformation
+import com.example.assesmentapplication.model.response.nowplaying.Result
 
-class HomeAdapter(private var feeds: MutableList<MovieInformation>,
+class HomeAdapter(private var movieResults: List<Result>,
     private val itemClickListener: OnItemClickListener) : RecyclerView.Adapter<HomeAdapter.MovieListViewHolder>() {
-
-    private val items: MutableList<MovieInformation> = arrayListOf()
 
     inner class MovieListViewHolder(val binding: HomeLayoutItemBinding) :
         ViewHolder(binding.root) {
 
-        fun bind(feed: MovieInformation, clickListener: OnItemClickListener) {
+        fun bind(feed: Result, clickListener: OnItemClickListener) {
             binding.root.setOnClickListener {
                 clickListener.onItemClicked(feed)
             }
@@ -33,14 +31,14 @@ class HomeAdapter(private var feeds: MutableList<MovieInformation>,
         return MovieListViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = items.size
+    override fun getItemCount(): Int = movieResults.size
 
     override fun onBindViewHolder(holder: MovieListViewHolder, position: Int) {
-        val feed = feeds[position]
-        holder.bind(feed, itemClickListener)
+        val movieInfo = movieResults[position]
+        holder.bind(movieInfo, itemClickListener)
     }
 }
 
 interface OnItemClickListener {
-    fun onItemClicked(feeds: MovieInformation)
+    fun onItemClicked(feeds: Result)
 }

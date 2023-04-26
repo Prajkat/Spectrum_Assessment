@@ -2,11 +2,8 @@ package com.example.assesmentapplication.di.module
 
 import android.app.Application
 import android.content.Context
-import com.example.assesmentapplication.BuildConfig
 import com.example.assesmentapplication.MainApplication
 import com.example.assesmentapplication.di.ApplicationContext
-import com.example.assesmentapplication.model.network.Networking
-import com.example.assesmentapplication.model.service.MovieService
 import dagger.Module
 import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable
