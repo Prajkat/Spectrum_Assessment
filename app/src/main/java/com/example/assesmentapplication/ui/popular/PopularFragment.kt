@@ -1,5 +1,6 @@
 package com.example.assesmentapplication.ui.popular
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import com.example.assesmentapplication.di.module.FragmentModule
 import com.example.assesmentapplication.model.response.nowplaying.Result
 import com.example.assesmentapplication.ui.home.HomeAdapter
 import com.example.assesmentapplication.ui.home.OnItemClickListener
+import com.example.assesmentapplication.ui.moviedetails.MovieDetailsActivity
 import javax.inject.Inject
 
 class PopularFragment : Fragment(), OnItemClickListener {
@@ -68,6 +70,8 @@ class PopularFragment : Fragment(), OnItemClickListener {
     }
 
     override fun onItemClicked(feeds: Result) {
-        // TODO("Not yet implemented")
+        requireActivity().run{
+            startActivity(Intent(this, MovieDetailsActivity::class.java))
+        }
     }
 }

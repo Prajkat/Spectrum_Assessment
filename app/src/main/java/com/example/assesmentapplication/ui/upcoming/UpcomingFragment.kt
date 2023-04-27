@@ -1,5 +1,6 @@
 package com.example.assesmentapplication.ui.upcoming
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +13,9 @@ import com.example.assesmentapplication.di.module.FragmentModule
 import com.example.assesmentapplication.model.response.nowplaying.Result
 import com.example.assesmentapplication.ui.home.HomeAdapter
 import com.example.assesmentapplication.ui.home.OnItemClickListener
+import com.example.assesmentapplication.ui.moviedetails.MovieDetailsActivity
 import com.example.assesmentapplication.ui.popular.PopularViewModel
+import java.io.Serializable
 import javax.inject.Inject
 
 class UpcomingFragment : Fragment(), OnItemClickListener {
@@ -66,7 +69,9 @@ class UpcomingFragment : Fragment(), OnItemClickListener {
         fragmentComponent.inject(this)
     }
 
-    override fun onItemClicked(feeds: Result) {
-        //TODO("Not yet implemented")
+    override fun onItemClicked(movieDetails: Result) {
+        val intent = Intent(requireContext(), MovieDetailsActivity::class.java)
+        intent.putExtra("studentData", movieDetails as Serializable)
+        startActivity(intent)
     }
 }

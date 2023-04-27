@@ -1,8 +1,10 @@
 package com.example.assesmentapplication.model.service
 
+import com.example.assesmentapplication.model.response.moviedetails.MovieDetails
 import com.example.assesmentapplication.model.response.nowplaying.MovieResponse
 import io.reactivex.Observable
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 import javax.inject.Singleton
 
@@ -20,4 +22,7 @@ interface MovieService {
 
     @GET("/3/movie/upcoming")
     fun fetchUpcomingMovies(@Query("page") page: Int): Observable<MovieResponse>
+
+    @GET("/3/movie/{movie-id}")
+    fun fetchMovieDetails(@Path("movie-id") movieId: Int): Observable<MovieDetails>
 }

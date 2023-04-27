@@ -1,6 +1,8 @@
 package com.example.assesmentapplication.ui.home
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +15,8 @@ import com.example.assesmentapplication.databinding.HomeFragmentBinding
 import com.example.assesmentapplication.di.component.DaggerFragmentComponent
 import com.example.assesmentapplication.di.module.FragmentModule
 import com.example.assesmentapplication.model.response.nowplaying.Result
+import com.example.assesmentapplication.ui.moviedetails.MovieDetailsActivity
+import java.io.Serializable
 import javax.inject.Inject
 
 class HomeFragment : Fragment(), OnItemClickListener {
@@ -71,8 +75,10 @@ class HomeFragment : Fragment(), OnItemClickListener {
         fragmentComponent.inject(this)
     }
 
-    override fun onItemClicked(feeds: Result) {
-        // TODO("Not yet implemented")
+    override fun onItemClicked(movieDetails: Result) {
+        val intent = Intent(requireContext(), MovieDetailsActivity::class.java)
+        intent.putExtra("movieID", movieDetails.id)
+        startActivity(intent)
     }
 }
 

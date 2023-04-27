@@ -1,5 +1,6 @@
 package com.example.assesmentapplication.repository
 
+import com.example.assesmentapplication.model.response.moviedetails.MovieDetails
 import com.example.assesmentapplication.model.response.nowplaying.MovieResponse
 import com.example.assesmentapplication.model.service.MovieService
 import io.reactivex.Observable
@@ -20,4 +21,7 @@ class MovieRepository @Inject constructor(
 
     fun fetchUpcomingMovies(page: Int): Observable<MovieResponse> =
         movieService.fetchUpcomingMovies(page)
+
+    fun fetchMovieDetails(movieId: Int): Observable<MovieDetails> =
+        movieService.fetchMovieDetails(movieId)
 }
